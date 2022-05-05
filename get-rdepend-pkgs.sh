@@ -16,9 +16,9 @@ apt-get source $pkg_name
 
 if [ ! -d "$dependencies_folder" ] 
 then
-    mkdir dependencies
+    mkdir "$dependencies_folder"
 fi
-cd dependencies
+cd "$dependencies_folder"
 
 echo "Getting depending packages of $pkg_name ..."
 apt-cache rdepends $pkg_name | awk 'NR > 2 {pos=index($1,"|"); print substr($1,pos+1) }' | xargs -i bash -c "apt-get source {} || true"  
